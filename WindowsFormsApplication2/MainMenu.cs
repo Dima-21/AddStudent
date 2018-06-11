@@ -43,18 +43,25 @@ namespace WindowsFormsApplication2
         {
             var selItem = LBStudents.SelectedItem as Student;
 
-            var wnd = new AddStudent();
-            wnd.NameP = selItem.Name;
-            wnd.Surname = selItem.Surname;
-            wnd.Patronymic = selItem.Patronymic;
-            wnd.Birthday = selItem.Birthday;
+            var wnd = new StatsMenu();
+            wnd.Marks = new List<int>() { 1, 2, 43, 4, 32, 2 };
+            wnd.MarkAdded += Wnd_MarkAdded;
             //wnd.Teachers = teachers;
-            wnd.ShowDialog();
-            wnd.Dispose();
+            wnd.Show();
+        
+        }
+
+        private void Wnd_MarkAdded(object sender, MarkEventArgs e)
+        {
+            MessageBox.Show(e.Mark.ToString());
+            students.Where(x => x.Name == e.StudentName).Single().Marks.Add(e.Mark);
+            students.Select(x => x.Name).ToArray();
         }
 
         private void BAdd_Click(object sender, EventArgs e)
         {
+            
+
             var wnd = new AddStudent();
             wnd.Teachers = teachers;
             if (wnd.ShowDialog() == DialogResult.OK)

@@ -17,7 +17,11 @@ namespace WindowsFormsApplication2
             InitializeComponent();
         }
 
-
+        public event EventHandler<MarkEventArgs> MarkAdded;
+        protected virtual void OnMarkAdded(int mark)
+        {
+            MarkAdded?.Invoke(this, new MarkEventArgs { Mark = mark });
+        }
         public string TeacherName
         {
 
@@ -49,5 +53,11 @@ namespace WindowsFormsApplication2
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int num = int.Parse(comboBox1.Text);
+            Marks.Add(num);
+            OnMarkAdded(num);
+        }
     }
 }

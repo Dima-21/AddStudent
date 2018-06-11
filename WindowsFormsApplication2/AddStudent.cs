@@ -22,7 +22,7 @@ namespace WindowsFormsApplication2
         public string SelectTeacher
         {
             get { return (string)CBTeachers.SelectedItem; }
-            set { CBTeachers.SelectedValue  = value; }
+            set { CBTeachers.SelectedItem  = value; }
         }       
 
         public List<Teacher> Teachers
